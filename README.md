@@ -66,8 +66,8 @@ This assignment highlights the trade-offs between using simple and advanced filt
 - [X] Load clean images and apply noise (Gaussian, Salt-and-Pepper).
 - [X] Implement Box, Gaussian, and Median filters.
 - [X] Implement advanced filters (Adaptive mean, Adaptive median, Bilateral).
-- [ ] Measure MSE and PSNR for each filter and kernel size.
-- [ ] Perform edge preservation analysis with Canny detector.
-- [ ] Measure computational time for filter applications.
+- [X] Measure MSE and PSNR for each filter and kernel size.
+- [X] Perform edge preservation analysis with Canny detector.
+- [X] Measure computational time for filter applications.
 - [ ] Document results and analysis in the report.
 - [ ] Finalize discussion and submit the report.
