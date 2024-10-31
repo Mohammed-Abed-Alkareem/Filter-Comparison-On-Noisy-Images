@@ -94,23 +94,23 @@ def plot_with_noise_filtered(images, images_with_noise, images_with_filter, nois
 def plot_with_edges(images, images_with_edges, filter_type, noise_type, noise_values, kernel_sizes, kernel_sizes_to_show):
     original_edges = [cv2.Canny(img, 100, 200) for img in images]
 
-    for i in range(len(images)):
-        print_with_border(f"Showing Edges for image {i + 1} with {filter_type} filter for {noise_type} noise:")
+    for j in range(len(noise_values)):
+        print_with_border(f"Showing Edges for {noise_type} noise {noise_values[j]} with {filter_type} filter:")
 
-        for j in range(len(noise_values)):
-            print(f"\n\tShowing Edges for {noise_type} noise {noise_values[j]}:")
+        fig, axs = plt.subplots(len(images), len(kernel_sizes_to_show) + 1, figsize=(15, 5 * len(images)))
 
-            fig, axs = plt.subplots(1, len(kernel_sizes_to_show)+1, figsize=(10, 10))
+        for i in range(len(images)):
+            axs[i, 0].imshow(original_edges[i], cmap='gray')
+            axs[i, 0].axis('off')
+            axs[i, 0].set_title(f'Original Edges {i + 1}')
 
-            axs[0].imshow(original_edges[i], cmap='gray')
-            axs[0].axis('off')
-            axs[0].set_title('Original Edges')
+            for k in kernel_sizes_to_show:
+                axs[i, kernel_sizes_to_show.index(k) + 1].imshow(images_with_edges[i][j][kernel_sizes.index(k)], cmap='gray')
+                axs[i, kernel_sizes_to_show.index(k) + 1].axis('off')
+                axs[i, kernel_sizes_to_show.index(k) + 1].set_title(f'Kernel size: {k}')
+                
 
-            for k in range(len(kernel_sizes_to_show)):
-                axs[k+1].imshow(images_with_edges[i][j][kernel_sizes.index(kernel_sizes_to_show[k])], cmap='gray')
-                axs[k+1].axis('off')
-                axs[k+1].set_title(f'Edges: {filter_type} filter: {kernel_sizes_to_show[k]}')
+        plt.suptitle(f'Edges for {noise_type} noise {noise_values[j]} with {filter_type} filter', y=1.005)
 
-            plt.tight_layout()
-
-            plt.show()
+        plt.tight_layout()
+        plt.show()

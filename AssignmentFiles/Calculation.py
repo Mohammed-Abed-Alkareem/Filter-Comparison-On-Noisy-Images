@@ -20,7 +20,8 @@ def MSE(original, noisy):
     return np.mean(error)
 
 
-#images_with_gaussian_filter_gaussian = {0:{noise1:[k3, k5, k7], noise2:[k3, k5, k7]}, 1:{noise1:[k3, k5, k7], noise2:[k3, k5, k7]}, ...}
+#images_with_gaussian_filter_gaussian = {0:{noise1:[k3, k5, k7], noise2:[k3, k5, k7]}, 
+#                                       1:{noise1:[k3, k5, k7], noise2:[k3, k5, k7]}, ...}
 def calculate_MSE_for_filters(images, images_with_filter, kernel_sizes):
     MSE_results = {i: {n: [] for n in range(len(images_with_filter[i]))} for i in range(len(images))}
     
