@@ -72,19 +72,19 @@ def plot_with_noise_filtered(images, images_with_noise, images_with_filter, nois
             print(f"\n\tShowing images with {filter_type} filter for {noise_type} noise {noise_values[j]}")
 
 
-            fig, axs = plt.subplots(1, len(kernel_sizes_to_show)+2, figsize=(10, 10))
+            fig, axs = plt.subplots(1, len(kernel_sizes_to_show)+2, figsize=(6, 6))
 
             axs[0].imshow(images[i], cmap='gray')
             axs[0].axis('off')
-            axs[0].set_title('Original')
+            axs[0].set_title('Original', fontsize=8)
 
             axs[1].imshow(images_with_noise[i][noise_type][j], cmap='gray')
             axs[1].axis('off')
-            axs[1].set_title(f'{noise_type} noise: {noise_values[j]}')
+            axs[1].set_title(f'{noise_type} noise: {noise_values[j]}', fontsize=8)
             for k in range(len(kernel_sizes_to_show)):
                 axs[k+2].imshow(images_with_filter[i][j][kernel_sizes.index(kernel_sizes_to_show[k])], cmap='gray')
                 axs[k+2].axis('off')
-                axs[k+2].set_title(f'Kernel size: {kernel_sizes_to_show[k]}')
+                axs[k+2].set_title(f'Kernel size: {kernel_sizes_to_show[k]}', fontsize=8)
         
 
             plt.tight_layout()
@@ -97,17 +97,17 @@ def plot_with_edges(images, images_with_edges, filter_type, noise_type, noise_va
     for j in range(len(noise_values)):
         print_with_border(f"Showing Edges for {noise_type} noise {noise_values[j]} with {filter_type} filter:")
 
-        fig, axs = plt.subplots(len(images), len(kernel_sizes_to_show) + 1, figsize=(15, 5 * len(images)))
+        fig, axs = plt.subplots(len(images), len(kernel_sizes_to_show) + 1, figsize=(6, 6))
 
         for i in range(len(images)):
             axs[i, 0].imshow(original_edges[i], cmap='gray')
             axs[i, 0].axis('off')
-            axs[i, 0].set_title(f'Original Edges {i + 1}')
+            axs[i, 0].set_title(f'Original Edges {i + 1}', fontsize=8)
 
             for k in kernel_sizes_to_show:
                 axs[i, kernel_sizes_to_show.index(k) + 1].imshow(images_with_edges[i][j][kernel_sizes.index(k)], cmap='gray')
                 axs[i, kernel_sizes_to_show.index(k) + 1].axis('off')
-                axs[i, kernel_sizes_to_show.index(k) + 1].set_title(f'Kernel size: {k}')
+                axs[i, kernel_sizes_to_show.index(k) + 1].set_title(f'Kernel size: {k}', fontsize=8)
                 
 
         plt.suptitle(f'Edges for {noise_type} noise {noise_values[j]} with {filter_type} filter', y=1.005)

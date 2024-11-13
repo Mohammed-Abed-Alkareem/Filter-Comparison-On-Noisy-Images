@@ -14,7 +14,7 @@ def MSE(original, noisy):
     float: Mean Squared Error (MSE) between the two images.
     """
     # Calculate the squared error between the two images
-    error = (original - noisy) ** 2
+    error = np.square(original - noisy)
 
     # Calculate the mean of the squared error
     return np.mean(error)
