@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+image_size = 10
+
 def load_images_from_folder(folder):
     images = []
     for filename in os.listdir(folder):
@@ -50,20 +52,6 @@ def print_with_border(message):
     print()
 
 def plot_with_noise_filtered(images, images_with_noise, images_with_filter, noise_type:str, filter_type:str, noise_values:list, kernel_sizes: list, kernel_sizes_to_show: list):
-    """
-    Plots original images, images with noise, and filtered images using specified filters and kernel sizes.
-    Parameters:
-    images (list of ndarray): List of original images.
-    images_with_noise (list of dict): List of dictionaries containing images with different types of noise.
-    filtered_images (list of list of list of ndarray): List of lists containing filtered images for each noise type and kernel size.
-    noise_type (str): Type of noise applied to the images.
-    filter_type (str): Type of filter used to filter the images.
-    values (list): List of noise values applied to the images.
-    kernel_sizes (list): List of all possible kernel sizes used for filtering.
-    kernel_sizes_to_show (list): List of kernel sizes to display in the plot.
-    Returns:
-    None
-    """
 
     for i in range(len(images)):
         print_with_border(f"Showing images with {filter_type} filter for image {i + 1}")
@@ -72,7 +60,7 @@ def plot_with_noise_filtered(images, images_with_noise, images_with_filter, nois
             print(f"\n\tShowing images with {filter_type} filter for {noise_type} noise {noise_values[j]}")
 
 
-            fig, axs = plt.subplots(1, len(kernel_sizes_to_show)+2, figsize=(6, 6))
+            fig, axs = plt.subplots(1, len(kernel_sizes_to_show)+2, figsize=(image_size, image_size))
 
             axs[0].imshow(images[i], cmap='gray')
             axs[0].axis('off')
@@ -97,7 +85,7 @@ def plot_with_edges(images, images_with_edges, filter_type, noise_type, noise_va
     for j in range(len(noise_values)):
         print_with_border(f"Showing Edges for {noise_type} noise {noise_values[j]} with {filter_type} filter:")
 
-        fig, axs = plt.subplots(len(images), len(kernel_sizes_to_show) + 1, figsize=(6, 6))
+        fig, axs = plt.subplots(len(images), len(kernel_sizes_to_show) + 1, figsize=(image_size, image_size))
 
         for i in range(len(images)):
             axs[i, 0].imshow(original_edges[i], cmap='gray')

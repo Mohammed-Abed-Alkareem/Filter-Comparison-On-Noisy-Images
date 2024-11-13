@@ -2,50 +2,9 @@
 import numpy as np
 
 def adaptiveMedianFilter(img, max_kernel_size=7):
-    """
-    Apply adaptive median filtering to an image.
-
-    Parameters:
-    img (numpy.ndarray): Input grayscale image (2D array).
-    max_kernel_size (int): Maximum allowed kernel size for the filter. Default is 7.
-
-    Returns:
-    numpy.ndarray: Filtered image with noise reduced using adaptive median filtering.
-    """
-
-    def getMedianValue(window) -> int:
-        """
-        Calculate the median value of a window.
-
-        Parameters:
-        window (numpy.ndarray): 2D array (window) from which the median is to be calculated.
-
-        Returns:
-        int: Median value of the window.
-        """
-        # Flatten and sort the window to compute the median
-        window = np.sort(window, axis=None)
-
-        # If the number of elements is even, return the average of the middle two elements
-        if window.size % 2 == 0:
-            return int((window[window.size // 2 - 1].astype(np.int32) + window[window.size // 2].astype(np.int32)) / 2)
-        else:
-            return window[window.size // 2]
-
+  
     def adaptiveMedianFilterRec(img, x, y, kernel_size, max_kernel_size):
-        """
-        Apply the adaptive median filter recursively at a specific pixel location.
-
-        Parameters:
-        img (numpy.ndarray): Input image.
-        x (int): x-coordinate (row index) of the current pixel.
-        y (int): y-coordinate (column index) of the current pixel.
-        kernel_size (int): Current kernel size being applied.
-        max_kernel_size (int): Maximum allowed kernel size.
-
-        Returns:
-        int: Filtered pixel value.
-        """
+       
         half_size = kernel_size // 2
         x_min = max(x - half_size, 0)
         x_max = min(x + half_size + 1, img.shape[0])
@@ -58,7 +17,7 @@ def adaptiveMedianFilter(img, max_kernel_size=7):
         # Find the minimum, maximum, and median values in the window
         z_min = np.min(window)
         z_max = np.max(window)
-        z_med = getMedianValue(window)
+        z_med = int(np.median(window))
 
         # Step A: Check the difference between the median and min/max values
         A1 = z_med - z_min
@@ -110,44 +69,15 @@ def adaptiveMedianFilter(img, max_kernel_size=7):
 
 
 def adaptiveMeanFilter(img, max_kernel_size=7):
-    """
-    Apply adaptive mean filtering to an image.
-
-    Parameters:
-    img (numpy.ndarray): Input grayscale image (2D array).
-    max_kernel_size (int): Maximum allowed kernel size for the filter. Default is 7.
-
-    Returns:
-    numpy.ndarray: Filtered image with noise reduced using adaptive mean filtering.
-    """
+   
 
     def getMeanValue(window) -> int:
-        """
-        Calculate the mean value of a window.
-
-        Parameters:
-        window (numpy.ndarray): 2D array (window) from which the mean is to be calculated.
-
-        Returns:
-        int: Mean value of the window.
-        """
+       
         # Calculate the mean of the window, rounding to the nearest integer
         return int(np.mean(window))
 
     def adaptiveMeanFilterRec(img, x, y, kernel_size, max_kernel_size):
-        """
-        Apply the adaptive mean filter recursively at a specific pixel location.
-
-        Parameters:
-        img (numpy.ndarray): Input image.
-        x (int): x-coordinate (row index) of the current pixel.
-        y (int): y-coordinate (column index) of the current pixel.
-        kernel_size (int): Current kernel size being applied.
-        max_kernel_size (int): Maximum allowed kernel size.
-
-        Returns:
-        int: Filtered pixel value.
-        """
+       
         half_size = kernel_size // 2
         x_min = max(x - half_size, 0)
         x_max = min(x + half_size + 1, img.shape[0])
