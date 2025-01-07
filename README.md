@@ -10,7 +10,6 @@ This repository contains the code and experiments for comparing the performance 
 - [Results](#results)
 - [Discussion](#discussion)
 - [Conclusion](#conclusion)
-- [Checklist](#checklist)
 
 ## Objective
 
@@ -69,5 +68,5 @@ This assignment highlights the trade-offs between using simple and advanced filt
 - [X] Measure MSE and PSNR for each filter and kernel size.
 - [X] Perform edge preservation analysis with Canny detector.
 - [X] Measure computational time for filter applications.
-- [ ] Document results and analysis in the report.
-- [ ] Finalize discussion and submit the report.
+- [X] Document results and analysis in the report.
+- [X] Finalize discussion and submit the report.
